@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "strictNullChecks": true,
+        "sourceMap": true
+    },
+    "files": [
+        "tetris.ts"
+    ]
+}

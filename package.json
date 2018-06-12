@@ -1,0 +1,11 @@
+{
+    "name": "tetris",
+    "version": "0.0.1",
+    "devDependencies": {
+        "eslint": "^4.19.1",
+        "typescript-eslint-parser": "^16.0.0"
+    },
+    "dependencies": {
+        "typescript": "^2.9.1"
+    }
+}
