@@ -56,19 +56,19 @@ const BACKGROUND_COLOR = '#343434';
 const COLORS = [
     BACKGROUND_COLOR,
     // I
-    'cyan',
+    '#00dfff',
     // J
-    'blue',
+    '#76c0ff',
     // L
-    'orange',
+    '#ffa333',
     // O
-    'yellow',
+    '#e3c600',
     // S
-    'lime',
+    '#67e04a',
     // Z
-    'red',
+    '#ff7a8a',
     // T
-    'purple',
+    '#ff84ff',
 ];
 
 const NUM_BLOCKS = 4;
@@ -247,6 +247,7 @@ const PIECES = PIECE_STRINGS.map(
 const GRID_WIDTH = 10;
 const GRID_HEIGHT = 20;
 const CELL_SIZE = '10px';
+const TIMER_INTERVAL = 300; // in ms
 let gridEls: GridCellElement[][];
 const grid: number[][] = [];
 for (let y = 0; y < GRID_HEIGHT; y++) {
@@ -384,17 +385,39 @@ function setupKeyboard() {
     });
 }
 
+let gameTimer: number | null = null;
+
+function stopTimer() {
+    if (gameTimer === null) return;
+    clearInterval(gameTimer);
+    gameTimer = null;
+}
+
+function startTimer() {
+    stopTimer();
+    gameTimer = setInterval(() => {
+        try {
+            movePieceDown();
+        } catch (e) {
+            stopTimer();
+        }
+    }, TIMER_INTERVAL);
+}
+
+function createButton(label: string, func: () => void) {
+    let button = document.createElement('button');
+    button.textContent = label;
+    document.body.appendChild(button);
+    button.addEventListener('click', func);
+}
+
 function init() {
     'use strict';
     createGrid();
     setupKeyboard();
-    let gameTimer = setInterval(() => {
-        try {
-            movePieceDown();
-        } catch (e) {
-            clearInterval(gameTimer);
-        }
-    }, 200);
+    createButton('Pause', stopTimer);
+    createButton('Resume', startTimer);
+    startTimer();
 }
 
 document.addEventListener('DOMContentLoaded', init);
