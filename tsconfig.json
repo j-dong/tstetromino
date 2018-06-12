@@ -4,6 +4,6 @@
         "sourceMap": true
     },
     "files": [
-        "tetris.ts"
+        "tetro.ts"
     ]
 }
