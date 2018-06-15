@@ -370,10 +370,10 @@ function setupKeyboard() {
         } else if (ev.code === 'ArrowDown') {
             currentPiece.moveDown();
             render();
-        } else if (ev.code === 'ArrowUp') {
+        } else if (ev.code === 'Space') {
             while (!currentPiece.moveDown());
             render();
-        } else if (ev.code === 'KeyZ') {
+        } else if (ev.code === 'KeyZ' || ev.code === 'ArrowUp') {
             if (currentPiece.kickRotate(true)) {
                 render();
             }
